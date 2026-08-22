@@ -1,0 +1,72 @@
+/* 1. Global Reset & Body*/
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #12131c;
+    color: #e2e4f0;
+    font-family: sans-serifs;
+}
+
+/* 2. Navbar Container*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a1c29;
+    padding: 15px 30px;
+    border-bottom: 1px solid #2a2d40;
+}
+
+/* 3. Left Nav (Logo + Nav Links) */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #e2e4f0;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #ff8da1;
+}
+
+/* 4. Right Nav (Search Input)*/
+.search-box input {
+    background-color: #12131c;
+    border: 1px solid #2a2d40;
+    border-radius: 20px;
+    padding: 8px 16px;
+    color: #e2e4f0;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.search-box input:focus {
+    border-color: #ff8da1;
+}
+
+/* 5. Main Content Area */
+.main-content {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
