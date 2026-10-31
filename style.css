@@ -1,137 +1,204 @@
-/* 1. Global Reset & Body*/
-body {
+/* ---------- COLORS (change here, whole page updates) ---------- */
+:root {
+    --bg: #12131c;
+    --panel: #1a1c29;
+    --accent: #8b5cf6;
+    --text: #ecebf5;
+    --muted: #9a98b3;
+  }
+  
+  * { box-sizing: border-box; }
+  
+  html { scroll-behavior: smooth; }   /* makes the #links glide instead of jump */
+  
+  body {
     margin: 0;
-    padding: 0;
-    background-color: #12131c;
-    color: #e2e4f0;
-    font-family: sans-serifs;
-}
-
-/* 2. Navbar Container*/
-.navbar {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, "Noto Sans Devanagari", sans-serif;
+  }
+  
+  /* ---------- NAVBAR ---------- */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    background-color: #1a1c29;
-    padding: 15px 30px;
-    border-bottom: 1px solid #2a2d40;
-}
-
-/* 3. Left Nav (Logo + Nav Links) */
-.nav-left {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-
-.logo {
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #ffffff;
+    align-items: stretch;
+    background: var(--panel);
+    border-top: 2px solid #22243a;       /* the horizontal lines */
+    border-bottom: 2px solid #3a3d5c;
+  }
+  
+  .nav-links { display: flex; }
+  
+  .nav-links a {
+    position: relative;
+    padding: 18px 21px;                  /* more space between the links */
+    font-size: 1.2rem;                   /* bigger text */
+    color: var(--text);
     text-decoration: none;
-}
-
-.nav-links {
+  }
+  .nav-links a:hover { color: var(--accent); }
+  
+  /* the slanted divider after each link, like "/" in your sketch */
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #3a3d5c;
+    transform: skewX(-20deg);            /* this is what slants it. Change -20 for more or less lean */
+  }
+  
+  .search-box {
+    position: relative;                  /* lets the icon sit inside the box */
+    flex: 0 1 400px;                     /* longer search bar */
+    margin: 6px 6px;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    pointer-events: none;                /* clicks go through to the input */
+  }
+  
+  #search {
+    width: 100%;
+    padding: 10px 18px 10px 46px;        /* 46px on the left makes room for the icon */
+    font-size: 1rem;
+    border-radius: 999px;
+    border: 2px solid #3a3d5c;
+    background: var(--bg);
+    color: var(--text);
+  }
+  
+  @media (max-width: 700px) {            /* shrinks things on phones so they fit */
+    .nav-links a { padding: 14px 14px; font-size: 1.05rem; }
+    .search-box { flex: 1 1 auto; margin: 8px 12px; }
+  }
+  
+  /* ---------- SONG CARDS ---------- */
+  #songs {
+    scroll-margin-top: 70px;
+    padding: 48px 0;
+  }
+  
+  .carousel { position: relative; }
+  
+  .track {
     display: flex;
     gap: 20px;
-}
-
-.nav-links a {
-    color: #e2e4f0;
+    padding: 10px 100px;
+    overflow-x: auto;            /* lets the row scroll sideways */
+    scrollbar-width: none;       /* hide the scrollbar (Firefox) */
+    /* fade the left and right edges */
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+  .track::-webkit-scrollbar { display: none; }   /* hide the scrollbar (Chrome, Edge) */
+  
+  .card {
+    position: relative;
+    flex: 0 0 320px;             /* every card is exactly 320px wide, no shrinking */
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden;            /* hides the blurred image's edges */
+    color: var(--text);
     text-decoration: none;
-    font-size: 0.95rem;
-    transition: color 0.2s ease;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-    color: #ff8da1;
-}
-
-/* 4. Right Nav (Search Input)*/
-.search-box input {
-    background-color: #12131c;
-    border: 1px solid #2a2d40;
-    border-radius: 20px;
-    padding: 8px 16px;
-    color: #e2e4f0;
-    font-size: 0.9rem;
-    outline: none;
-    transition: border-color 0.2s ease;
-}
-
-.search-box input:focus {
-    border-color: #ff8da1;
-}
-
-/* 5. Main Content Area */
-.main-content {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
-
-/* 6. Song Page: Audio Player */
-audio {
-    width: 210px; /* makes it narrower */
-    transform: scale(0.9); /* makes it slightly shorter/tighter */
-    transform-origin: left;
-}
-
-/* 7. Song Page: Links */
-.container a {
-    color: #ff8da1;
-    text-decoration: none;
-    font-family: sans-serif;
-    font-size: 15px;
-}
-
-.container a:hover {
-    color: #ffb3c1;
-    text-decoration: underline;
-}
-
-/* 8. Song Page: Container Card */
-.container {
-    max-width: 600px;
-    margin: 40px auto;
+    background: linear-gradient(135deg, #2a2550, var(--panel));   /* shows if the cover is missing */
+  }
+  .card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;           /* crops the cover to fill the card */
+    filter: blur(6px) brightness(0.55);
+    transform: scale(1.1);       /* hides the soft blurry edges */
+    transition: filter 0.2s;
+  }
+  .card:hover img { filter: blur(3px) brightness(0.7); }
+  
+  .info {
+    position: relative;          /* sits on top of the image */
+    height: 100%;
     padding: 20px;
-    background-color: #1a1c29;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .info h3 { margin: 0; font-size: 1.7rem; }
+  .info p  { margin: 4px 0 0; color: #d6d4e8; }
+  
+  /* ---------- ARROWS ---------- */
+  .arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 60px;
+  height: 60px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);       /* plain solid circle, no fade */
+  color: #fff;
+  display: flex;                   /* these 3 lines center the arrow inside */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.2s, background 0.2s;
+}
+.arrow:hover { background: #a07cf8; }
+#prev { left: 6px; }
+#next { right: 6px; }
+.arrow.hidden { opacity: 0; pointer-events: none; }   /* the left arrow starts hidden */ 
+
+<section class="journey">
+<h2>The story behind this site</h2>
+<p>
+  This site started as a doodle on lined paper. I'd been teaching myself to code, mostly Python,
+  and kept getting stuck in tutorials I could follow but couldn't build anything from. So I picked
+  something I actually care about, Nepali songs, and decided to build a home for their lyrics.
+  One song page at a time, then a shared stylesheet, a dark purple theme, a 🎶 favicon, and finally
+  this homepage, built from my own sketch with a search bar and a sliding row of song cards.
+  I mix Devanagari and Romanized lyrics on purpose, because that's how I actually read these songs.
+  Along the way I learned what divs, classes and ids really do, and I got help with the JavaScript
+  and worked through what every line does. It's still growing, and every new song I add teaches me something.
+</p>
+</section>
+  /* ---------- INFO CARD (footer) ---------- */
+  footer { scroll-margin-top: 70px; padding: 40px 24px 24px;}
+  
+  .info-card {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 28px;
+    display: flex;
+    flex-wrap: wrap;             /* columns stack on small screens */
+    gap: 32px;
+    background: var(--panel);
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-}
-
-/* 9. Song Page: Lyrics */
-pre {
-    font-family: sans-serif;
-    text-align: center;
-    line-height: 1.8;
-    font-size: 1.1rem;
-    white-space: pre-wrap;
-}
-
-/* Devanagari-script lyrics pages (e.g. Muskuraye) add class="devanagari" to <pre> */
-pre.devanagari {
-    font-family: "Noto Sans Devanagari", sans-serif;
-    font-weight: 520;
-}
-
-/* 10. Song Page: Title */
-.container h1 {
-    font-family: sans-serif;
-    text-align: left;
-    font-size: 2rem;
-    margin-bottom: 9px;
-    color: #ffffff;
-}
-
-/* 11. Song Page: Album Cover (rounded edges + hover effect) */
-.container img {
+  }
+  .journey {
+    max-width: 900px;
+    margin: 0 auto 24px;
+    padding: 28px;
+    background: var(--panel);
     border-radius: 12px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.container img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-}
+  }
+  
+  .info-col { flex: 1 1 200px; }
+  .info-col h4 { margin: 0 0 12px; font-size: 1.1rem; }
+  .info-col p  { margin: 0 0 8px; color: var(--muted); }
+  .info-col a  { display: block; margin-bottom: 8px; color: var(--muted); text-decoration: none; }
+  .info-col a:hover { color: var(--accent); }
+  
+  .copyright { text-align: center; color: var(--muted); margin: 20px 0 0; font-size: 0.9rem; }

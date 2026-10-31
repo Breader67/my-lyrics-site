@@ -1,44 +1,80 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nepali Lyrics - Home</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- Header Navbar -->
-    <header class="navbar">
-      <nav class="nav-links">
-        <a href="index.html" class="active">Home</a>
-        <span class="divider"></span>
-        <a href="#">Songs</a>
-        <span class="divider"></span>
-        <a href="#">Contact</a>
-      </nav>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nepali Lyrics</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-      <div class="search-box">
-        <!-- Compact SVG icon positioned inside the input wrapper -->
-        <svg
-          class="search-icon"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input type="text" placeholder="Search songs..." />
+<!-- id="top" gives the Home link something to jump to -->
+<body id="top">
+
+  <!-- NAVBAR: three links + search box. href="#songs" scrolls to the element with id="songs" -->
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="#top">Home</a>
+      <a href="#songs">Songs</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="search-box">
+      <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="10" cy="10" r="6"/><path d="M15 15l5 5"/></svg>
+      <input id="search" type="search" placeholder="Search for songs" autocomplete="off">
+    </div>
+  </nav>
+  <!-- SONG CARDS: home.js fills #track with the cards -->
+  <main id="songs">
+    <div class="carousel">
+      <button id="prev" class="arrow hidden" aria-label="Scroll left">
+        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" 
+        stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      </button>
+      <div id="track" class="track"></div>
+      <button id="next" class="arrow" aria-label="Scroll right">
+        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" 
+        stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+    <p id="empty" class="empty" hidden>No songs start with that.</p>
+  </main>
+
+  <!-- INFO CARD at the bottom. Edit the placeholder text. -->
+  <footer id="contact">
+    <section class="journey">
+      <h2>The story behind this site</h2>
+      <p>
+        This site started as a doodle on lined paper. I'd been teaching myself to code, mostly Python,
+        and kept getting stuck in tutorials I could follow but couldn't build anything from. So I picked
+        something I actually care about, Nepali songs, and decided to build a home for their lyrics.
+        One song page at a time, then a shared stylesheet, a dark purple theme, a 🎶 favicon, and finally
+        this homepage, built from my own sketch with a search bar and a sliding row of song cards.
+        I mix Devanagari and Romanized lyrics on purpose, because that's how I actually read these songs.
+        Along the way I learned what divs, classes and ids really do, and I got help with the JavaScript
+        and worked through what every line does. It's still growing, and every new song I add teaches me something.
+      </p>
+    </section>
+    <div class="info-card">
+      <div class="info-col">
+        <h4>Nepali Lyrics</h4>
+        <p>A small collection of Nepali songs and their lyrics, built by hand with HTML and CSS.</p>
       </div>
-    </header>
+      <div class="info-col">
+        <h4>Links</h4>
+        <a href="#top">Home</a>
+        <a href="#songs">Songs</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="info-col">
+        <h4>Contact</h4>
+        <p>Email: Shubhambohara87@gmail.com
+               Breaderstudios@gmail.com
+        </p>
+        <p>GitHub: github.com/breader67</p>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2026 Shubham Bohara. All rights reserved.</p>
+  </footer>
 
-    <!-- Main Content Area -->
-    <main class="main-content">
-      <h1>Welcome to Nepali Lyrics</h1>
-      <p>Select a song from the navbar or check back soon for new additions!</p>
-    </main>
-  </body>
+  <script src="home-search.js"></script>
+</body>
 </html>
