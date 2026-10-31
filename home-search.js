@@ -3,12 +3,12 @@
 // "page" = the song's lyrics page, "cover" = its album cover image.
 // CHECK THESE PATHS match your repo, or the links and covers will break.
 const songs = [
-    { title: "Kasari",    artist: "-Yabesh Thapa", page: "../songs/kasari.html",    cover: "../stuff/kasari-cover.jpg" },
-    { title: "Tadha",     artist: "-Yabesh Thapa", page: "../songs/tadha.html",     cover: "../stuff/tadha-cover.jpg" },
-    { title: "Muskuraye", artist: "-Yabesh Thapa", page: "../songs/muskuraye.html", cover: "../stuff/muskuraye-cover.jpg" },
-    { title: "Kalo Seto", artist: "-Purna Rai",    page: "../songs/kalo-seto.html", cover: "../stuff/kalo-seto-cover.jpg" },
-    { title: "Bairan",    artist: "-Banjaare",     page: "../songs/bairan.html",    cover: "../stuff/bairan-cover.jpg" },
-    { title: "Barsaat",   artist: "-Banjaare",     page: "../songs/barsaat.html",   cover: "../stuff/barsaat-cover.jpg" },
+    { title: "Kasari",    artist: "-Yabesh Thapa", page: "../songs/kasari.html",    cover: "stuff/kasari-cover.jpg" },
+    { title: "Tadha",     artist: "-Yabesh Thapa", page: "../songs/tadha.html",     cover: "stuff/tadha-cover.jpg" },
+    { title: "Muskuraye", artist: "-Yabesh Thapa", page: "../songs/muskuraye.html", cover: "stuff/muskuraye-cover.jpg" },
+    { title: "Kalo Seto", artist: "-Purna Rai",    page: "../songs/kalo-seto.html", cover: "stuff/kalo-seto-cover.jpg" },
+    { title: "Bairan",    artist: "-Banjaare",     page: "../songs/bairan.html",    cover: "stuff/bairan-cover.jpg" },
+    { title: "Barsaat",   artist: "-Banjaare",     page: "../songs/barsaat.html",   cover: "stuff/barsaat-cover.jpg" },
   ];
   
   // ---------- GRAB THE ELEMENTS WE NEED (by their ids from index.html) ----------
